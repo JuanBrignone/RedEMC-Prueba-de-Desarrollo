@@ -11,7 +11,7 @@ Usé **Claude Code** (modelo Claude Opus 5.5) desde VS Code. Con esa herramienta
 
 ## Prompts clave
 
-1. «Tengo que realizar esta prueba para ingresar a un trabajo como desarrollador. Quiero que me ayudes a realizar lo que pide», con el PDF de la prueba adjunto.
+1. «Voy a empezar esta prueba técnica de desarrollo (adjunto el PDF) y quiero trabajarla contigo como par técnico: ayúdame a analizar lo que se necesita, evaluar posibles enfoques y despejar bloqueos específicos durante el desarrollo.
 2. «La parte de crear la tabla lo quiero hacer en railway, sin instalar cosas nuevas».
 3. «Tenes que usar lo que dice el stack que te envie, no agregar cosas como el dockerfile ni nada extra, solo lo que dice el archivo».
 
