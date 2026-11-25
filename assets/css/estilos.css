@@ -1,0 +1,237 @@
+:root {
+    --azul: #4551bf;
+    --azul-oscuro: #343e9c;
+    --celeste: #4a90e2;
+    --texto: #222;
+    --texto-suave: #626a73;
+    --borde: #d9dee7;
+    --fondo: #f3f5fa;
+    --error: #c0303b;
+    --exito: #1c7a46;
+}
+
+body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: Montserrat, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.panel {
+    padding: 1.75rem;
+    background: #fff;
+    border-top: 4px solid var(--azul);
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(34, 34, 34, .07);
+}
+
+.panel-titulo {
+    margin: 0 0 1.25rem;
+    color: var(--azul);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Formulario */
+
+.campo {
+    margin-bottom: 1.1rem;
+}
+
+.campo .form-label {
+    margin-bottom: .35rem;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.opcional {
+    color: var(--texto-suave);
+    font-weight: 400;
+}
+
+.campo .form-control {
+    padding: .7rem .9rem;
+    background-color: #fafbfd;
+    border: 2px solid var(--borde);
+    border-radius: 8px;
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+
+.campo .form-control:hover {
+    border-color: var(--celeste);
+}
+
+.campo .form-control:focus {
+    background-color: #fff;
+    border-color: var(--azul);
+    box-shadow: 0 0 0 4px rgba(69, 81, 191, .15);
+}
+
+.campo .form-control::placeholder {
+    color: #8b93a0;
+}
+
+.campo .form-control.is-invalid {
+    background-image: none;
+    border-color: var(--error);
+}
+
+.campo .form-control.is-invalid:focus {
+    box-shadow: 0 0 0 4px rgba(192, 48, 59, .15);
+}
+
+.campo-error:not(:empty) {
+    margin-top: .35rem;
+    color: var(--error);
+    font-size: .85rem;
+}
+
+.btn-guardar,
+.btn-guardar:disabled {
+    padding: .75rem;
+    background: var(--azul);
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    transition: background-color .2s;
+}
+
+.btn-guardar:hover,
+.btn-guardar:focus-visible,
+.btn-guardar:active {
+    background: var(--azul-oscuro) !important;
+    color: #fff !important;
+}
+
+.aviso:not(:empty) {
+    margin-top: .9rem;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.aviso-exito {
+    color: var(--exito);
+}
+
+.aviso-error {
+    color: var(--error);
+}
+
+/* Listado */
+
+.total {
+    color: var(--texto-suave);
+    font-size: .85rem;
+}
+
+.fila {
+    display: grid;
+    grid-template-columns: 1.2fr 1.6fr .8fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: .8rem .75rem;
+    border-bottom: 1px solid #eee;
+    font-size: .9rem;
+}
+
+.fila > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.fila-encabezado {
+    border-bottom: 2px solid var(--borde);
+    color: var(--texto-suave);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.fila-nombre {
+    font-weight: 600;
+}
+
+.fila-nueva {
+    animation: destacar 2.5s ease-out;
+}
+
+@keyframes destacar {
+    from { background-color: #dfe6fb; }
+    to   { background-color: transparent; }
+}
+
+.cargando {
+    opacity: .5;
+}
+
+.estado:not(:empty) {
+    padding: 2rem 0;
+    color: var(--texto-suave);
+    text-align: center;
+}
+
+.paginado:not(:empty) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+.paginado button {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0 .7rem;
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    color: var(--azul);
+    font-size: .9rem;
+    transition: background-color .2s;
+}
+
+.paginado button:hover:not(:disabled) {
+    background: #eef0fb;
+}
+
+.paginado button:disabled {
+    color: #a3a9b3;
+}
+
+.paginado button.actual,
+.paginado button.actual:hover:not(:disabled) {
+    background: var(--azul);
+    border-color: var(--azul);
+    color: #fff;
+}
+
+.paginado .puntos {
+    align-self: center;
+    color: var(--texto-suave);
+}
+
+@media (max-width: 767.98px) {
+    .panel {
+        padding: 1.25rem;
+    }
+
+    .fila-encabezado {
+        display: none;
+    }
+
+    .fila {
+        grid-template-columns: 1fr;
+        gap: .15rem;
+        padding: .8rem 0;
+    }
+
+    .fila-telefono-vacio {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
