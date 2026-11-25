@@ -12,8 +12,8 @@ Usé **Claude Code** (modelo Claude Opus 5.5) desde VS Code. Con esa herramienta
 ## Prompts clave
 
 1. «Tengo que realizar esta prueba para ingresar a un trabajo como desarrollador. Quiero que me ayudes a realizar lo que pide», con el PDF de la prueba adjunto.
-2. «Me esta pidiendo explicitamente que se use Raialway».
-3. «Tenes que usar lo que dice el stack y seguir al pie de la letra lo que dice el pdf, no agregar cosas como el dockerfile ni nada extra, solo lo que dice el archivo».
+2. «La parte de crear la tabla lo quiero hacer en railway, sin instalar cosas nuevas».
+3. «Tenes que usar lo que dice el stack que te envie, no agregar cosas como el dockerfile ni nada extra, solo lo que dice el archivo».
 
 ## Algo que rechacé
 
@@ -21,4 +21,6 @@ La IA propuso desplegar con un Dockerfile y usar imágenes de Docker para probar
 
 ## Algo que aprendí
 
-_PENDIENTE_
+Realizando esta prueba aprendí a utilizar Railway, una tecnología que no había utilizado nunca. Al desplegar, la aplicación fallaba con el error could not find driver. Revisando los logs con ayuda de la IA, vimos que faltaba la extensión pdo_mysql, que conecta PHP con MySQL, y que la variable que la IA me había indicado para instalarla no funcionaba en este proyecto. Lo resolví con un Custom Build Command.
+
+También es la primera vez que utilizo PHP, algo totalmente nuevo para mí, aunque sé que es muy utilizado.

@@ -2,7 +2,7 @@
 
 Formulario de ingreso de datos y listado paginado, sin recargar la página.
 
-**Proyecto publicado:** _PENDIENTE: link de Railway_
+**Proyecto publicado:** https://redemc-prueba-de-desarrollo-production.up.railway.app
 
 **Stack:** HTML, CSS, Bootstrap 5, JavaScript/jQuery, PHP y MySQL.
 
@@ -39,11 +39,15 @@ Formulario de ingreso de datos y listado paginado, sin recargar la página.
    MYSQLUSER=${{MySQL.MYSQLUSER}}
    MYSQLPASSWORD=${{MySQL.MYSQLPASSWORD}}
    MYSQLDATABASE=${{MySQL.MYSQLDATABASE}}
-   RAILPACK_PHP_EXTENSIONS=pdo_mysql
    ```
 
-   La última instala la extensión de PHP que se conecta con MySQL.
-4. Crear la tabla: en el servicio MySQL, **Settings > Networking**, habilitar el acceso público, conectarse con un cliente MySQL usando los datos de `MYSQL_PUBLIC_URL` y ejecutar `sql/schema.sql`. Después, deshabilitar el acceso público.
-5. Desplegar los cambios con **Deploy**.
+   En **Settings > Build > Custom Build Command**, poner `install-php-extensions pdo_mysql`, que instala la extensión de PHP que se conecta con MySQL. (La variable `RAILPACK_PHP_EXTENSIONS` no sirve acá: Railpack la ignora si no hay `composer.json`.)
+4. Crear la tabla: en el servicio de la aplicación, **Settings > Deploy > Pre-Deploy Command**, poner este comando, que ejecuta `sql/schema.sql` sobre la base:
+
+   ```
+   php -r 'require "src/Database.php"; Database::conectar()->exec(file_get_contents("sql/schema.sql"));'
+   ```
+
+5. Aplicar los cambios con **Deploy**. Con la tabla ya creada, el comando se puede quitar.
 6. En el servicio de la aplicación, **Settings > Networking > Generate Domain** para obtener el link público.
 7. Desde ese link, ingresar un dato y comprobar que aparece primero en el listado y que sigue al recargar.

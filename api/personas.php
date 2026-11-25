@@ -1,12 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-/**
- * GET  api/personas.php?pagina=N  Lista una página de registros.
- * POST api/personas.php           Valida y guarda un registro (cuerpo JSON).
- */
-
 require __DIR__ . '/../src/Database.php';
 require __DIR__ . '/../src/PersonaValidator.php';
 require __DIR__ . '/../src/PersonaRepository.php';
@@ -34,8 +28,6 @@ function listar(): never
 
 function guardar(): never
 {
-    // Exigir JSON impide que un formulario de otro sitio envíe datos (CSRF):
-    // el navegador bloquea este tipo de contenido entre distintos orígenes.
     if (!str_starts_with(strtolower($_SERVER['CONTENT_TYPE'] ?? ''), 'application/json')) {
         responder(415, ['mensaje' => 'El contenido debe enviarse como JSON.']);
     }
@@ -59,7 +51,6 @@ function guardar(): never
     $id          = $errores === [] ? $repositorio->insertar($datos) : null;
 
     if ($id === null) {
-        // Si otro envío se adelantó, se vuelve a consultar qué campo quedó repetido.
         $errores = $errores ?: $repositorio->duplicados($datos);
         responder(422, ['mensaje' => 'Revisá los campos marcados.', 'errores' => $errores]);
     }
@@ -68,17 +59,11 @@ function guardar(): never
 }
 
 try {
-    switch ($_SERVER['REQUEST_METHOD']) {
-        case 'GET':
-            listar();
-            // no break: listar() termina la ejecución
-        case 'POST':
-            guardar();
-            // no break: guardar() termina la ejecución
-        default:
-            header('Allow: GET, POST');
-            responder(405, ['mensaje' => 'Método no permitido.']);
-    }
+    match ($_SERVER['REQUEST_METHOD']) {
+        'GET'   => listar(),
+        'POST'  => guardar(),
+        default => responder(405, ['mensaje' => 'Método no permitido.']),
+    };
 } catch (Throwable $e) {
     // El detalle queda en el log del servidor; nunca se expone al usuario.
     error_log((string) $e);
